@@ -1,7 +1,7 @@
 /*!
-angular-xeditable - 0.1.10
+angular-xeditable - 0.1.9
 Edit-in-place for angular.js
-Build date: 2015-08-19 
+Build date: 2015-03-26 
 */
 /**
  * Angular-xeditable module 
@@ -32,7 +32,7 @@ angular.module('xeditable', [])
    */  
   icon_set: 'default',
   /**
-   * Whether to show buttons for single editalbe element.  
+   * Whether to show buttons for single editable element.  
    * Possible values `right` (default), `no`.
    * 
    * @var {string} buttons
@@ -341,13 +341,7 @@ angular.module('xeditable').directive('editableTextarea', ['editableDirectiveFac
       autosubmit: function() {
         var self = this;
         self.inputEl.bind('keydown', function(e) {
-          if (self.attrs.submitOnEnter) {
-            if (e.keyCode === 13 && !e.shiftKey) {
-              self.scope.$apply(function() {
-                self.scope.$form.$submit();
-              });
-            }
-          } else if ((e.ctrlKey || e.metaKey) && (e.keyCode === 13)) {
+          if ((e.ctrlKey || e.metaKey) && (e.keyCode === 13)) {
             self.scope.$apply(function() {
               self.scope.$form.$submit();
             });
@@ -638,7 +632,7 @@ angular.module('xeditable').factory('editableController',
 
       /*
       Originally render() was inside init() method, but some directives polluting editorEl,
-      so it is broken on second openning.
+      so it is broken on second opening.
       Cloning is not a solution as jqLite can not clone with event handler's.
       */
       self.render();
@@ -863,8 +857,8 @@ function($parse, $compile, editableThemes, $rootScope, $document, editableContro
         // element wrapped by form
         if(ctrl[1]) {
           eFormCtrl = ctrl[1];
-          hasForm = attrs.eSingle === undefined;
-        } else if(attrs.eForm) { // element not wrapped by <form>, but we hane `e-form` attr
+          hasForm = true;
+        } else if(attrs.eForm) { // element not wrapped by <form>, but we have `e-form` attr
           var getter = $parse(attrs.eForm)(scope);
           if(getter) { // form exists in scope (above), e.g. editable column
             eFormCtrl = getter;
@@ -1064,7 +1058,6 @@ angular.module('xeditable').factory('editableFormController',
       if (this.$visible) {
         editable.catchError(editable.show());
       }
-      editable.catchError(editable.setWaiting(this.$waiting));
     },
 
     $removeEditable: function(editable) {
