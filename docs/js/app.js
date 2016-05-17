@@ -1,4 +1,4 @@
-var app = angular.module("app", ["xeditable", "ngMockE2E", 'ui.bootstrap', 'checklist-model']);
+var app = angular.module("app", ["xeditable", "ngMockE2E", 'ui.bootstrap', 'checklist-model', 'ui.select']);
 
 //add delay to $httpBackend
 app.config(function($provide) {
@@ -69,7 +69,7 @@ app.run(function($rootScope, $httpBackend, editableOptions, editableThemes) {
   editableOptions.activate = 'focus';
 
 
-  $rootScope.css = ['libs/bootstrap/3.0.0/css/bootstrap.css'];
+  $rootScope.css = ['libs/bootstrap/3.3.6/css/bootstrap.css'];
 
  
   /*
